@@ -1,11 +1,8 @@
-import Post from '../../models/Post';
+import Post from "../../models/Post";
 
-export default async function (ctx: any) {
-  const limit:number = ctx.req.limit||10;
-  const page:number = ctx.req.page||1;
-
-  console.log('listPost');
-
+export default async function(ctx: any) {
+  const limit: number = ctx.req.limit || 10;
+  const page: number = ctx.req.page || 1;
   const query = Post.find({})
     .limit(limit)
     .skip(limit * (page - 1));
