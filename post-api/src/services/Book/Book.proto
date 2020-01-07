@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+// Doc: https://developers.google.com/protocol-buffers/docs/proto3
+
+package sample;
+
+message Book {
+  string _id = 1;
+  string title = 2;
+  string text = 3;
+}
+
+message Books {
+  int32 page = 1;
+  int32 limit = 2;
+  int32 count = 3;
+  repeated Book nodes = 4;
+}
+
+message addBookRequest {
+  reserved 1; // _id
+  required string title = 2;
+  string text = 3;
+}
+
+message listBookRequest {
+  optional string page = 1 [default = 1];
+  optional string limit = 2;
+  optional string _id = 3;
+}
+
+service BookService {
+  rpc addBook (addBookRequest) returns (Book) {}
+  rpc listBooks (listBookRequest) returns (Books) {}
+}

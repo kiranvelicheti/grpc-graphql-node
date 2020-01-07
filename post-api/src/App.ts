@@ -6,6 +6,8 @@ import * as grpc from "grpc";
 import Mali from "mali";
 
 import PostService from "./services/Post";
+import BookService from "./services/Book";
+
 import HealthService from "./services/Health";
 
 class App {
@@ -31,9 +33,12 @@ class App {
       );
     });
     this.server.addService(PostService.protoPath, "PostService");
+    this.server.addService(BookService.protoPath, "BookService");
     this.server.addService(HealthService.protoPath);
+
     this.server.use(PostService.implementation);
     this.server.use(HealthService.implementation);
+    this.server.use(BookService.implementation);
 
     this.server.start(`0.0.0.0:${this.port}`);
     console.info("server started");
